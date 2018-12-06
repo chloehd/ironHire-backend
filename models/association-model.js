@@ -24,7 +24,7 @@ const associationSchema = new Schema({
         unique: true,
         match: /^.+@.+\..+$/,
       }, 
-    telNumber: { type: String },
+    telNumber: { type: Number },
     encryptedPassword: { type: String },
 }, {
         timestamps: true

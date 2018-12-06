@@ -4,14 +4,14 @@ const Schema = mongoose.Schema;
 const cvSchema = new Schema({
     candidatePic: { type: String },
     firstName: { type: String, required: true },
-    LastName: { type: String, required: true },
+    lastName: { type: String, required: true },
     email: {
         type: String,
         required: true,
         unique: true,
         match: /^.+@.+\..+$/,
       }, 
-    telNumber: { type: String },
+    telNumber: { type: Number },
     employmentStatus: { type: String },
     experience: [{
         companyName: { type: String, required: true },
