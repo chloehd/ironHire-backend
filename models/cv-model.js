@@ -2,7 +2,7 @@ const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
 const cvSchema = new Schema({
-    candidatePic: { type: String },
+    profilePic: { type: String },
     firstName: { type: String, required: true },
     lastName: { type: String, required: true },
     email: {
@@ -11,7 +11,7 @@ const cvSchema = new Schema({
         unique: true,
         match: /^.+@.+\..+$/,
       }, 
-    telNumber: { type: Number },
+    telephoneNumber: { type: Number },
     employmentStatus: { 
         type: String,
         enum: ["searching", "open to offers", "employed"],
