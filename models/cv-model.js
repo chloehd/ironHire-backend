@@ -15,7 +15,6 @@ const cvSchema = new Schema({
     employmentStatus: { 
         type: String,
         enum: ["searching", "open to offers", "employed"],
-        required: true,
      },
     experience: [{
         companyName: { type: String, required: true },

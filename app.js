@@ -1,5 +1,3 @@
-require('dotenv').config();
-
 const bodyParser   = require('body-parser');
 const cookieParser = require('cookie-parser');
 const express      = require('express');
@@ -10,6 +8,7 @@ const cors         = require("cors");
 const session      = require("express-session");
 const MongoStore   = require("connect-mongo")(session);
 const passport     = require("passport");
+
 
 require("./config/passport-setup.js");
 
@@ -47,7 +46,16 @@ app.use(passport.session());
 const adminRouter = require("./routes/admin-router.js");
 app.use("/", adminRouter);
 
+const index = require("./routes/index.js");
+app.use("/api", index);
+
 const assoRouter = require("./routes/association-router.js");
-app.use("/api", assoRouter);
+app.use("/api/asso", assoRouter);
+
+const recruitRouter = require("./routes/recruiter-router.js");
+app.use("/api/recruiter", recruitRouter);
+
+const candidateRouter = require("./routes/candidate-router.js");
+app.use("/api/candidate", candidateRouter);
 
 module.exports = app;

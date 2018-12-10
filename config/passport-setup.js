@@ -1,6 +1,8 @@
 const passport = require("passport");
 
-// const User = require("../models/user-model.js");
+const UserAsso = require("../models/association-model.js");
+const UserCandidate = require('../models/cv-model.js');
+const UserRecruiter = require("../models/recruiter-model.js");
 
 passport.serializeUser((userDoc, done) => {
   console.log("SERIALIZE (save user ID to session) 🐋");
@@ -11,11 +13,27 @@ passport.serializeUser((userDoc, done) => {
 passport.deserializeUser((userId, done) => {
   console.log("DESERIALIZE (retrieving user info from the DB) 🐓");
 
-  User.findById(userId)
+  UserAsso.findById(userId)
     .then(userDoc => {
-
-      done(null, userDoc);
+      if(userDoc){
+        done(null, userDoc);
+      }
+      else {
+        UserCandidate.findById(userId)
+        .then(userDoc => {
+          if(userDoc) {
+            done(null, userDoc);
+          }
+          else {
+            UserRecruiter.findById(userId)
+            .then(userDoc => {
+              done(null, userDoc);
+            })
+            .catch(err => done(err));
+          }
+        })
+        .catch(err => done(err));
+      }
     })
-
     .catch(err => done(err));
 });
