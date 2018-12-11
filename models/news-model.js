@@ -2,13 +2,13 @@ const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
 const newsSchema = new Schema({
-  postingTime: { type: Date, required: true },
+  date: { type: Date, required: true },
   message: { type: String, required: true },
   owner: { 
       type: Schema.Types.ObjectId, 
-      ref: "Association",
+      role: "association",
       required: true },
-  imageUrl: { type: String },
+  image: { type: String },
   link: { type: String },
 } , {
   timestamps: true,
