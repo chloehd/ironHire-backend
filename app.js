@@ -13,7 +13,7 @@ const passport     = require("passport");
 require("./config/passport-setup.js");
 
 mongoose
-  .connect('mongodb://localhost/ironhire', {useNewUrlParser: true})
+  .connect(process.env.MONGODB_URI, {useNewUrlParser: true})
   .then(x => {
     console.log(`Connected to Mongo! Database name: "${x.connections[0].name}"`)
   })
@@ -35,7 +35,7 @@ app.use(cors({
 }));
 
 app.use(session({
-  secret: "j}8L,ePKefVNk+La-!g4",
+  secret: process.env.SESSION_SECRET,
   resave: true,
   saveUninitialized: true,
   store: new MongoStore({ mongooseConnection: mongoose.connection }),
