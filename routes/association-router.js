@@ -2,6 +2,8 @@ const express = require("express");
 const bcrypt = require("bcrypt");
 
 const Association = require("../models/association-model.js");
+const News = require("../models/news-model.js");
+
 
 const router = express.Router();
 
@@ -51,6 +53,44 @@ router.post("/login", (req, res, next) => {
     })
     .catch(err => next(err));
 });
+
+
+
+router.get("/news", (req, res, next) => {
+  News.find()
+    .populate("owner")
+    .sort({createAt: -1})
+    .limit(30)
+    .then(newsResults => res.json(newsResults))
+    .catch(err => next(err));
+});
+
+
+router.post("/news", (req, res, next) => {
+  const { message, image, link } = req.body;
+
+  News.create({ message, image, link })
+    .then(newsDoc => res.json(newsDoc))
+    .catch(err => next(err));
+})
+
+router.get("/news/:id", (req, res, next) => {
+  const { id } = req.params;
+  News.findById(id)
+    .then(newsDoc => res.json(newsDoc))
+    .catch(err => next(err));
+});
+
+
+router.delete("/news/:id", (req, res, next) => {
+  const { id } = req.params;
+  
+  News.findByIdAndRemove(id)
+    .then(newsDoc => res.json(newsDoc))
+    .catch(err => next(err));
+})
+
+
 
 
 
