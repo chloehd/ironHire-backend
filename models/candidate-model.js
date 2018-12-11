@@ -2,17 +2,17 @@ const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
 const candidateSchema = new Schema({
-    profilePic: { type: String },
-    firstName: { type: String, required: true },
-    lastName: { type: String, required: true },
+    candidate_pic: { type: String },
+    first_name: { type: String, required: true },
+    last_name: { type: String, required: true },
     email: {
         type: String,
         required: true,
         unique: true,
         match: /^.+@.+\..+$/,
       }, 
-    telephoneNumber: { type: Number },
-    employmentStatus: { 
+    telephone_number: { type: Number },
+    employment_status: { 
         type: String,
         enum: ["searching", "open to offers", "employed"],
      },
@@ -20,7 +20,7 @@ const candidateSchema = new Schema({
         experience: { type: String, required: true }
     }],
     education: [{
-        education: { type: String, required: true },
+        education: { type: String },
     }],
     languages: [{ type: String, required: true }],
     skills: { type: String },

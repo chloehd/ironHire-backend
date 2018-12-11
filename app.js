@@ -60,6 +60,9 @@ app.use("/api/recruiter", recruitRouter);
 const candidateRouter = require("./routes/candidate-router.js");
 app.use("/api/candidate", candidateRouter);
 
+const fileUpload = require("./routes/files-router.js");
+app.use("api/upload-file", fileUpload);
+
 
 
 module.exports = app;
