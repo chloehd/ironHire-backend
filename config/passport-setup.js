@@ -1,7 +1,7 @@
 const passport = require("passport");
 
 const UserAsso = require("../models/association-model.js");
-const UserCandidate = require('../models/cv-model.js');
+const UserCandidate = require('../models/candidate-model.js');
 const UserRecruiter = require("../models/recruiter-model.js");
 
 passport.serializeUser((userDoc, done) => {
