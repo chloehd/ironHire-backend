@@ -1,8 +1,6 @@
 const express = require("express");
 const router = express.Router();
-
 const Association = require("../models/association-model.js");
-const Cv = require("../models/cv-model.js");
 
 
 
@@ -24,14 +22,6 @@ router.get("/admin", (req, res, next) => {
   })
   .catch(err => next(err));
 
-
-  Cv.find({ verified: { $eq: false }})
-    .then()
-    .catch();
-
 });
 
-
 module.exports = router;
-
-

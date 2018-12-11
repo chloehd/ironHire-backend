@@ -1,56 +1,27 @@
 const express = require("express");
-const bcrypt = require("bcrypt");
 
-const Candidate = require("../models/cv-model.js");
+const Candidate = require("../models/candidate-model.js");
 
 const router = express.Router();
 
 
-
-router.post("/signup", (req, res, next) => {
-  const { firstName, lastName, email, originalPassword } = req.body;
-
-  if (!originalPassword || originalPassword.match(/[0-9]/) === null) {
-    next(new Error("Incorrect password."));
-    return; 
-  }
-
-  const encryptedPassword = bcrypt.hashSync(originalPassword, 10);
-
-  Candidate.create({ firstName, lastName, email, encryptedPassword })
-    .then(candidateDoc => {
-      req.logIn(candidateDoc, () => {
-        candidateDoc.encryptedPassword = undefined;
-        res.json({ candidateDoc });
-      })
-    })
+// "GET" retrieve the details ONE Candidate
+router.get("/candidates", (req, res, next) => {
+  Candidate.find()
+    .then(candidateResults => res.json(candidateResults))
     .catch(err => next(err));
 });
 
+//"POST" create a new candidate profile (add to the list)
+router.post("/candidates", (req, res, next) => {
+  const { candidatePic, firstName, lastName, email, telephoneNumber, employmentStatus, skills, experience, languages, education } = req.body;
 
-router.post("/login", (req, res, next) => {
-  const { email, originalPassword } = req.body;
-
-  Candidate.findOne({ email: { $eq: email } })
-    .then(userDoc => {
-      if (!userDoc) {
-        next(new Error("Incorrect email. 🗑"))        
-        return; 
-      }
-
-      const { encryptedPassword } = userDoc;
-      if (!bcrypt.compareSync(originalPassword, encryptedPassword)) {
-          next(new Error("Incorrect password. 🍫 "));
-      }
-      else {
-        req.logIn( userDoc, () => {
-          userDoc.encryptedPassword = undefined;
-          res.json({ userDoc });
-        });
-      }
-    })
-    .catch(err => next(err));
+  Candidate.create({ candidatePic, firstName, lastName, email, telephoneNumber, employmentStatus, skills, experience, languages, education })
+  .then(candidateDoc => res.jeson(candidateDoc))
+  .catch(err => next(err));
 });
 
+
+// will add put(update) and delete routes later -hw
 
 module.exports = router;
