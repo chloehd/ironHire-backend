@@ -1,3 +1,5 @@
+require("dotenv").config();
+
 const bodyParser   = require('body-parser');
 const cookieParser = require('cookie-parser');
 const express      = require('express');
@@ -13,7 +15,7 @@ const passport     = require("passport");
 require("./config/passport-setup.js");
 
 mongoose
-  .connect('mongodb://localhost/ironhire', {useNewUrlParser: true})
+  .connect(process.env.MONGODB_URI, {useNewUrlParser: true})
   .then(x => {
     console.log(`Connected to Mongo! Database name: "${x.connections[0].name}"`)
   })
@@ -35,7 +37,7 @@ app.use(cors({
 }));
 
 app.use(session({
-  secret: "j}8L,ePKefVNk+La-!g4",
+  secret: process.env.SESSION_SECRET,
   resave: true,
   saveUninitialized: true,
   store: new MongoStore({ mongooseConnection: mongoose.connection }),
@@ -57,6 +59,9 @@ app.use("/api/recruiter", recruitRouter);
 
 const candidateRouter = require("./routes/candidate-router.js");
 app.use("/api/candidate", candidateRouter);
+
+const fileUpload = require("./routes/files-router.js");
+app.use("api/upload-file", fileUpload);
 
 
 

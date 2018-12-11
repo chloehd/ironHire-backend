@@ -5,6 +5,7 @@ const Association = require("../models/association-model.js");
 const News = require("../models/news-model.js");
 
 
+
 const router = express.Router();
 
 
@@ -91,8 +92,12 @@ router.delete("/news/:id", (req, res, next) => {
 })
 
 
+router.get("/all", (req, res, next) => {
+  Association.findById(id)
+  .then()
+  .catch();
 
-
+})
 
 
 

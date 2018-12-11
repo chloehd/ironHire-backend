@@ -28,8 +28,11 @@ router.post("/login", (req, res, next) => {
 
   AssoUser.findOne({ email: { $eq: email } })
     .then(userDoc => {
+<<<<<<< HEAD
      
 
+=======
+>>>>>>> 8ba7fe9cb0f2525ac26f5477e2902fb8a2b71a9b
       if (userDoc) {
         const { encryptedPassword } = userDoc;
         if (!bcrypt.compareSync(originalPassword, encryptedPassword)) {
@@ -77,12 +80,13 @@ router.post("/login", (req, res, next) => {
           .catch(err => next(err));
       }})
       .catch(err => next(err));
-
-      
     });
 
+<<<<<<< HEAD
 
 
+=======
+>>>>>>> 8ba7fe9cb0f2525ac26f5477e2902fb8a2b71a9b
 router.delete("/logout", (req, res, next) => {
   req.logout();
   res.json({ userDoc: null });
