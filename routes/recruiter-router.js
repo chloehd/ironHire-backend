@@ -2,6 +2,7 @@ const express = require("express");
 const bcrypt = require("bcrypt");
 
 const Recruiter = require("../models/recruiter-model.js");
+const Jobs = require("../models/job-model.js");
 
 const router = express.Router();
 
@@ -26,6 +27,8 @@ router.post("/signup", (req, res, next) => {
     })
     .catch(err => next(err));
 });
+
+
 
 
 module.exports = router;

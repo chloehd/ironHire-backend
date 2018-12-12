@@ -42,8 +42,4 @@ const candidateSchema = new Schema({
 
 const Candidate = mongoose.model("Cv", candidateSchema);
 
-<<<<<<< HEAD
 module.exports = Candidate;
-=======
-module.exports = Candidate;
->>>>>>> 8ba7fe9cb0f2525ac26f5477e2902fb8a2b71a9b
