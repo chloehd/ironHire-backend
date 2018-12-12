@@ -60,7 +60,7 @@ router.post("/login", (req, res, next) => {
 router.get("/news", (req, res, next) => {
   News.find()
     .populate("owner")
-    .sort({createAt: -1})
+    .sort({createdAt: -1})
     .limit(30)
     .then(newsResults => res.json(newsResults))
     .catch(err => next(err));
@@ -70,7 +70,7 @@ router.get("/news", (req, res, next) => {
 router.post("/news", (req, res, next) => {
   const { message, image, link } = req.body;
 
-  News.create({ message, image, link })
+  News.create({ message, image, link, owner: req.user._id })
     .then(newsDoc => res.json(newsDoc))
     .catch(err => next(err));
 })
@@ -93,11 +93,21 @@ router.delete("/news/:id", (req, res, next) => {
 
 
 router.get("/all", (req, res, next) => {
-  Association.findById(id)
-  .then()
-  .catch();
+  Association.find()
+    .then(assoResults => res.json(assoResults))
+    .catch(err => next(err));
+});
 
-})
+
+
+router.get("/:id", (req, res, next) => {
+  const { id } = req.params;
+  Association.findById(id)
+    .then(assoDoc => res.json(assoDoc))
+    .catch(err => next(err));
+});
+
+
 
 
 

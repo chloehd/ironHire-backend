@@ -28,7 +28,7 @@ router.post("/login", (req, res, next) => {
 
   AssoUser.findOne({ email: { $eq: email } })
     .then(userDoc => {
-     
+      
       if (userDoc) {
         const { encryptedPassword } = userDoc;
         if (!bcrypt.compareSync(originalPassword, encryptedPassword)) {
