@@ -7,6 +7,18 @@ const Jobs = require("../models/job-model.js");
 const router = express.Router();
 
 
+// candidate data 
+router.get("/candidates", (req, res, next) => {
+  Candidate.find()
+    .then(candidateResults => res.json(candidateResults))
+    .catch(err => next(err));
+});
+
+
+
+
+
+
 
 router.post("/signup", (req, res, next) => {
   const { companyName, email, originalPassword } = req.body;
