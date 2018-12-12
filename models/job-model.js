@@ -12,10 +12,10 @@ const jobSchema = new Schema ({
     location: { type: String, required: true },
     createdAt: { type: Date, required: true },
     deadline: { type: Date, required: true},
-    owner: { 
-        type: Schema.Types.ObjectId, 
-        role: "recruiter",
-        required: true },
+    // owner: { 
+    //     type: Schema.Types.ObjectId, 
+    //     role: "recruiter",
+    //     required: true },
 
 }
 
