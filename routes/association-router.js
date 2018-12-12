@@ -100,10 +100,12 @@ router.get("/all", (req, res, next) => {
 
 
 
-router.get("/:id", (req, res, next) => {
+router.get("/all/:id", (req, res, next) => {
   const { id } = req.params;
-  Association.findByIdAndUpdate(id)
-    .then(assoDoc => res.json(assoDoc))
+  Association.findById(id)
+    .then(assoDoc => {
+      res.json(assoDoc)
+    })
     .catch(err => next(err));
 });
 
