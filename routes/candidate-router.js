@@ -12,8 +12,18 @@ const router = express.Router();
 // });
 
 
+<<<<<<< HEAD
+=======
+router.get("/all", (req, res, next) => {
+  Candidate.find()
+    .then(candidateResults => res.json(candidateResults))
+    .catch(err => next(err));
+});
+
+
+>>>>>>> ca016c926d3cacd0eb1cfc192d60f164c6bfc6e2
 //"POST" create a new candidate profile (add to the list)
-router.post("/candidates", (req, res, next) => {
+router.post("/candidate", (req, res, next) => {
   const {
     candidatePic,
     firstName,

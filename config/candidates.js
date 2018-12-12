@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import candidatesData from "../bin/candidatesData";
 
-class candidates extends Component {
+class Candidates extends Component {
   render() {
     return (
       <div>
@@ -17,4 +17,4 @@ class candidates extends Component {
 }
 
 
-export default candidates; 
+export default Candidates; 
