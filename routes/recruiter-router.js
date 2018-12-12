@@ -3,7 +3,7 @@ const bcrypt = require("bcrypt");
 
 const Recruiter = require("../models/recruiter-model.js");
 const Jobs = require("../models/job-model.js");
-
+const Candidate = require("../models/candidate-model.js");
 const router = express.Router();
 
 
