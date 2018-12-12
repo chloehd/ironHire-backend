@@ -102,7 +102,7 @@ router.get("/all", (req, res, next) => {
 
 router.get("/:id", (req, res, next) => {
   const { id } = req.params;
-  Association.findById(id)
+  Association.findByIdAndUpdate(id)
     .then(assoDoc => res.json(assoDoc))
     .catch(err => next(err));
 });
