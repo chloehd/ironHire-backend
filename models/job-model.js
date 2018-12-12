@@ -8,8 +8,8 @@ const jobSchema = new Schema ({
     description: { type: String, required: true },
     contractType: { type: String, required: true },
     location: { type: String, required: true },
-    createdAt: { type: date, required: true },
-    deadline: { type: date, required: true},
+    createdAt: { type: Date, required: true },
+    deadline: { type: Date, required: true},
 
 
 
