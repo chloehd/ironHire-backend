@@ -4,12 +4,12 @@ const Candidate = require("../models/candidate-model.js");
 
 const router = express.Router();
 
-// "GET" retrieve the details ONE Candidate
-router.get("/candidates", (req, res, next) => {
-  Candidate.find()
-    .then(candidateResults => res.json(candidateResults))
-    .catch(err => next(err));
-});
+// // "GET" retrieve the details ONE Candidate
+// router.get("/candidates", (req, res, next) => {
+//   Candidate.find()
+//     .then(candidateResults => res.json(candidateResults))
+//     .catch(err => next(err));
+// });
 
 
 router.get("/candidatedata", (req, res, next) => {
@@ -17,7 +17,6 @@ router.get("/candidatedata", (req, res, next) => {
     .then(candidateResults => res.json(candidateResults))
     .catch(err => next(err));
 });
-
 
 
 //"POST" create a new candidate profile (add to the list)
@@ -47,7 +46,7 @@ router.post("/candidates", (req, res, next) => {
     languages,
     education
   })
-    .then(candidateDoc => res.jeson(candidateDoc))
+    .then(candidateDoc => res.json(candidateDoc))
     .catch(err => next(err));
 });
 
