@@ -12,7 +12,7 @@ const router = express.Router();
 // });
 
 
-router.get("/candidatedata", (req, res, next) => {
+router.get("/all", (req, res, next) => {
   Candidate.find()
     .then(candidateResults => res.json(candidateResults))
     .catch(err => next(err));
@@ -20,7 +20,7 @@ router.get("/candidatedata", (req, res, next) => {
 
 
 //"POST" create a new candidate profile (add to the list)
-router.post("/candidates", (req, res, next) => {
+router.post("/candidate", (req, res, next) => {
   const {
     candidatePic,
     firstName,
