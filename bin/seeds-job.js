@@ -45,7 +45,14 @@ description: "Knowledge in JavaScript, REACT, Express, Angular, Node.js, MongoDB
 contractType: "Contract",
 location: "Remote",
 createdAt: new Date("December 10, 2018"),
-deadline: new Date("January 3, 2019") } ]
+deadline: new Date("January 3, 2019") } ,
+
+{role: "Teacher Assistant",
+description: "The Teacher’s Aide shares responsibility with the Assistant Teacher in implementing the pre-school instructional program and supporting students in activities planned by the classroom's Head Teacher.",
+contractType: "Contract",
+location: "Paris, France",
+createdAt: new Date("December 1, 2018"),
+deadline: new Date("December 23, 2018") } ,]
 
 
 Job.create(jobData)

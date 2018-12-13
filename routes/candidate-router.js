@@ -1,6 +1,6 @@
 const express = require("express");
 
-const Candidate = require("../models/candidate-model.js");
+// const Candidate = require("../models/candidate-model.js");
 
 const router = express.Router();
 
@@ -12,15 +12,15 @@ const router = express.Router();
 // });
 
 
-router.get("/all", (req, res, next) => {
-  Candidate.find()
-    .then(candidateResults => res.json(candidateResults))
-    .catch(err => next(err));
-});
+// router.get("/all", (req, res, next) => {
+//   Candidate.find()
+//     .then(candidateResults => res.json(candidateResults))
+//     .catch(err => next(err));
+// });
 
 
 //"POST" create a new candidate profile (add to the list)
-router.post("/candidate", (req, res, next) => {
+router.post("/", (req, res, next) => {
   const {
     candidatePic,
     firstName,
