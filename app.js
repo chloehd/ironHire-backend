@@ -52,7 +52,7 @@ const index = require("./routes/index.js");
 app.use("/api", index);
 
 const assoRouter = require("./routes/association-router.js");
-app.use("/api/asso", assoRouter);
+app.use("/api/association", assoRouter);
 
 const recruitRouter = require("./routes/recruiter-router.js");
 app.use("/api/recruiter", recruitRouter);
@@ -61,7 +61,7 @@ const candidateRouter = require("./routes/candidate-router.js");
 app.use("/api/candidate", candidateRouter);
 
 const fileUpload = require("./routes/files-router.js");
-app.use("api/upload-file", fileUpload);
+app.use("/api/upload-file", fileUpload);
 
 
 
