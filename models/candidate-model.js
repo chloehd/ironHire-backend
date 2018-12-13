@@ -40,6 +40,6 @@ const candidateSchema = new Schema({
         timestamps: true
     });
 
-const Candidate = mongoose.model("candidate", candidateSchema);
+const Candidate = mongoose.model("cvs", candidateSchema);
 
 module.exports = Candidate;
