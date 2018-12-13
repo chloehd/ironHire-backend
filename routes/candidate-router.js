@@ -1,24 +1,15 @@
 const express = require("express");
-
-// const Candidate = require("../models/candidate-model.js");
-
+const bcrypt = require("bcrypt");
+const Jobs = require("../models/job-model.js");
 const router = express.Router();
 
-// // "GET" retrieve the details ONE Candidate
-// router.get("/candidates", (req, res, next) => {
-//   Candidate.find()
-//     .then(candidateResults => res.json(candidateResults))
-//     .catch(err => next(err));
-// });
-
-
-// router.get("/all", (req, res, next) => {
-//   Candidate.find()
-//     .then(candidateResults => res.json(candidateResults))
-//     .catch(err => next(err));
-// });
-
-
+// GET all of candidate data 
+router.get("/", (req, res, next) => {
+    Jobs.find()
+      .then(jobResults => res.json(jobResults))
+      .catch(err => next(err));
+  });
+  
 //"POST" create a new candidate profile (add to the list)
 router.post("/", (req, res, next) => {
   const {

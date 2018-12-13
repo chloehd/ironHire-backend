@@ -16,12 +16,12 @@ const candidateSchema = new Schema({
         type: String,
         enum: ["searching", "open to offers", "employed"],
      },
-    experience: [{
+    experience: {
         experience: { type: String, required: true }
-    }],
-    education: [{
+    },
+    education: {
         education: { type: String },
-    }],
+    },
     languages: [{ type: String, required: true }],
     skills: { type: String },
     verified: {
@@ -40,6 +40,6 @@ const candidateSchema = new Schema({
         timestamps: true
     });
 
-const Candidate = mongoose.model("candidate", candidateSchema);
+const Candidate = mongoose.model("cvs", candidateSchema);
 
 module.exports = Candidate;

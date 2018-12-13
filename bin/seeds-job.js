@@ -13,6 +13,7 @@ mongoose
   });
 
 const jobData = [{name: "Assembly Technician",
+salary: 25000,
 description: "The Assembly Technician works under direct supervision and typically in partnership with an Assembly Technician II or above. Incumbent will assemble and package mattresses and related material manually by performing repetitive line assembly operations to safely mass produce quality mattresses.",
 contractType: "Permanant",
 location: "Paris France",

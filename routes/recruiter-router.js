@@ -9,7 +9,9 @@ const router = express.Router();
 // GET all of candidate data 
 router.get("/allcandidates", (req, res, next) => {
   Candidate.find()
-    .then(candidateResults => res.json(candidateResults))
+    .then(candidateResults => {
+      console.log(candidateResults)
+      res.json(candidateResults)})
     .catch(err => next(err));
 });
 
