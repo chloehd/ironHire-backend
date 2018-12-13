@@ -1,24 +1,26 @@
 const express = require("express");
 const bcrypt = require("bcrypt");
-
 const Recruiter = require("../models/recruiter-model.js");
 const Jobs = require("../models/job-model.js");
 const Candidate = require("../models/candidate-model.js");
 const router = express.Router();
 
 
-// candidate data 
-router.get("/candidates", (req, res, next) => {
+// GET all of candidate data 
+router.get("/recruiter/allcandidates", (req, res, next) => {
   Candidate.find()
     .then(candidateResults => res.json(candidateResults))
     .catch(err => next(err));
 });
 
-
-
-
-
-
+//GET one candidate 
+router.get("/allcandidates/:id", (req, res, next) => {
+  const { id } = req.params;
+  Candidate.findById(id)
+    // send the query results as a JSON response to the client
+    .then(candidateDoc => res.json(candidateDoc))
+    .catch(err => next(err));
+});
 
 router.post("/signup", (req, res, next) => {
   const { companyName, email, originalPassword } = req.body;
