@@ -52,19 +52,16 @@ const index = require("./routes/index.js");
 app.use("/api", index);
 
 const assoRouter = require("./routes/association-router.js");
-app.use("/api", assoRouter);
+app.use("/api/association", assoRouter);
 
 const recruitRouter = require("./routes/recruiter-router.js");
-app.use("/api", recruitRouter);
+app.use("/api/recruiter", recruitRouter);
 
 const candidateRouter = require("./routes/candidate-router.js");
-app.use("/api", candidateRouter);
+app.use("/api/candidate", candidateRouter);
 
 const fileUpload = require("./routes/files-router.js");
-app.use("/api", fileUpload);
-
-const jobsRouter = require("./routes/jobs-router.js");
-app.use("/api", jobsRouter);
+app.use("/api", fileUpload); 
 
 
 

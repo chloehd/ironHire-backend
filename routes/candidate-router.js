@@ -20,7 +20,7 @@ const router = express.Router();
 
 
 //"POST" create a new candidate profile (add to the list)
-router.post("/candidate", (req, res, next) => {
+router.post("/", (req, res, next) => {
   const {
     candidatePic,
     firstName,

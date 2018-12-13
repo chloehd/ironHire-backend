@@ -57,7 +57,7 @@ router.post("/login", (req, res, next) => {
 
 
 
-router.get("/news", (req, res, next) => {
+router.get("/", (req, res, next) => {
   News.find()
     .populate("owner")
     .sort({createdAt: -1})
@@ -67,15 +67,21 @@ router.get("/news", (req, res, next) => {
 });
 
 
-router.post("/news", (req, res, next) => {
+router.post("/", (req, res, next) => {
   const { message, image, link } = req.body;
 
-  News.create({ message, image, link, owner: req.user._id })
+  News.create({ message, image, link, owner: req.user })
     .then(newsDoc => res.json(newsDoc))
     .catch(err => next(err));
 })
 
-router.get("/news/:id", (req, res, next) => {
+router.get("/all", (req, res, next) => {
+  Association.find()
+    .then(assoResults => res.json(assoResults))
+    .catch(err => next(err));
+});
+
+router.get("/:id", (req, res, next) => {
   const { id } = req.params;
   News.findById(id)
     .then(newsDoc => res.json(newsDoc))
@@ -83,20 +89,13 @@ router.get("/news/:id", (req, res, next) => {
 });
 
 
-router.delete("/news/:id", (req, res, next) => {
+router.delete("/:id", (req, res, next) => {
   const { id } = req.params;
   
   News.findByIdAndRemove(id)
     .then(newsDoc => res.json(newsDoc))
     .catch(err => next(err));
 })
-
-
-router.get("/all", (req, res, next) => {
-  Association.find()
-    .then(assoResults => res.json(assoResults))
-    .catch(err => next(err));
-});
 
 
 
@@ -109,6 +108,10 @@ router.get("/all/:id", (req, res, next) => {
     .catch(err => next(err));
 });
 
+// router.post("/change-profile", (req, res, next) => {
+  
+//   Association.findByIdAndUpdate()
+// })
 
 
 
