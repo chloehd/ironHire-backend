@@ -7,7 +7,7 @@ const router = express.Router();
 
 
 // GET all of candidate data 
-router.get("/allcandidates", (req, res, next) => {
+router.get("/", (req, res, next) => {
   Candidate.find()
     .then(candidateResults => {
       console.log(candidateResults)
@@ -19,10 +19,10 @@ router.get("/allcandidates", (req, res, next) => {
 router.get("/allcandidates/:id", (req, res, next) => {
   const { id } = req.params;
   Candidate.findById(id)
-    // send the query results as a JSON response to the client
     .then(candidateDoc => res.json(candidateDoc))
     .catch(err => next(err));
 });
+
 
 router.post("/signup", (req, res, next) => {
   const { companyName, email, originalPassword } = req.body;

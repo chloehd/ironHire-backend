@@ -108,11 +108,19 @@ router.get("/all/:id", (req, res, next) => {
     .catch(err => next(err));
 });
 
-// router.post("/change-profile", (req, res, next) => {
-  
-//   Association.findByIdAndUpdate()
-// })
-
+router.put("/change-profile", (req, res, next) => {
+  const { id } = req.params;
+  const { associationLogo, name, createdOn, description, addInformation,
+    email, telNumber } = req.body;
+  Association.findByIdAndUpdate(
+    id,
+    {$set: {associationLogo, name, createdOn, description, addInformation,
+      email, telNumber}},
+    { runValidators: true, new: true },
+  )
+  .then(assoDoc => res.json(assoDoc))
+  .catch(err => next(err));
+})
 
 
 
