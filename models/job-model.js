@@ -15,7 +15,7 @@ const jobSchema = new Schema ({
     owner: { 
         type: Schema.Types.ObjectId, 
         role: "recruiter",
-        required: true },
+     },
 
 }
 
