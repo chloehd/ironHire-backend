@@ -12,7 +12,7 @@ const recruiterSchema = new Schema({
         unique: true,
         match: /^.+@.+\..+$/,
       }, 
-    description: { type: String, required: true },
+    description: { type: String },
     encryptedPassword: { type: String },
     role: {
         type: String,

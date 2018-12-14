@@ -67,13 +67,13 @@ router.get("/", (req, res, next) => {
     .catch(err => next(err));
 
 
-  Candidate.find({verified: {$eq: false}})
-    .then(candidateResults => {
-      res.locals.candidateArray = candidateResults;
-      res.locals.candidateVerifNumber = candidateResults.length;
-      res.render("/");
-    })
-    .catch(err => next(err));
+  // Candidate.find({verified: {$eq: false}})
+  //   .then(candidateResults => {
+  //     res.locals.candidateArray = candidateResults;
+  //     res.locals.candidateVerifNumber = candidateResults.length;
+  //     res.render("/");
+  //   })
+  //   .catch(err => next(err));
 });
 
 
@@ -86,23 +86,23 @@ router.post("/", (req, res, next) => {
 });
 
 
-router.get("/", (req, res, next) => {
+// router.get("/", (req, res, next) => {
 
-const {candidateId} = req.params;
+// const {candidateId} = req.params;
 
-  Candidate.findByIdAndUpdate(
-    candidateId,
-    {$set:{verified: true}},
-    { runValidators: true })
-    .then(candidateResults => {
-      console.log(candidateResults);
-      res.locals.candidateArray = candidateResults;
-      res.locals.candidateVerifNumber = candidateResults.length;
-      res.redirect("/");
-    })
-    .catch(err => next(err));
+//   Candidate.findByIdAndUpdate(
+//     candidateId,
+//     {$set:{verified: true}},
+//     { runValidators: true })
+//     .then(candidateResults => {
+//       console.log(candidateResults);
+//       res.locals.candidateArray = candidateResults;
+//       res.locals.candidateVerifNumber = candidateResults.length;
+//       res.redirect("/");
+//     })
+//     .catch(err => next(err));
 
-});
+// });
 
 
 router.get("/all", (req, res, next) => {
@@ -139,11 +139,10 @@ router.get("/all/:id", (req, res, next) => {
 });
 
 router.put("/change-profile", (req, res, next) => {
-  const { id } = req.params;
   const { associationLogo, name, createdOn, description, addInformation,
     email, telNumber } = req.body;
   Association.findByIdAndUpdate(
-    id,
+    req.user._id,
     {$set: {associationLogo, name, createdOn, description, addInformation,
       email, telNumber}},
     { runValidators: true, new: true },

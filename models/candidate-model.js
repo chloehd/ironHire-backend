@@ -16,12 +16,16 @@ const candidateSchema = new Schema({
         type: String,
         enum: ["searching", "open to offers", "employed"],
      },
-    experience: {
-        experience: { type: String, required: true }
-    },
-    education: {
-        education: { type: String },
-    },
+    experience: [{
+        companyName: { type: String, required: true },
+        duration: { type: String, required: true },
+        tasks: { type: String, required: true },
+    }],
+    education: [{
+        studyName: { type: String, required: true },
+        schoolName: { type: String, required: true },
+        duration: { type: String, required: true },
+    }],
     languages: [{ type: String, required: true }],
     skills: { type: String },
     verified: {
