@@ -9,6 +9,22 @@ router.get("/", (req, res, next) => {
       .then(jobResults => res.json(jobResults))
       .catch(err => next(err));
   });
+
+
+
+
+  router.get("/:id", (req, res, next) => {
+    const { id } = req.params;
+    Phone.findById(id)
+      // send the query results as a JSON response to the client
+      .then(candidateDoc => res.json(candidateDoc))
+      .catch(err => next(err));
+  });
+
+
+
+
+
   
 //"POST" create a new candidate profile (add to the list)
 router.post("/", (req, res, next) => {
