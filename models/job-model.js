@@ -10,7 +10,7 @@ const jobSchema = new Schema ({
     description: { type: String, required: true },
     contractType: { type: String, required: true },
     location: { type: String, required: true },
-    createdAt: { type: Date, required: true },
+    createdAt: { type: Date },
     deadline: { type: Date, required: true},
     owner: { 
         type: Schema.Types.ObjectId, 

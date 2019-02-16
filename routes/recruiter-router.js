@@ -23,6 +23,22 @@ router.get("/allcandidates/:id", (req, res, next) => {
     .catch(err => next(err));
 });
 
+router.get("/add-job", (req, res, next) => {
+  Candidate.find()
+    .sort({first_name: -1})
+    .then(candidateResults => res.json(candidateResults))
+    .catch(err => next(err));
+
+});
+
+router.post("/add-job", (req, res, next) => {
+  const { name, salary, educationLevel, description, contractType, location, deadline } = req.body;
+
+    Jobs.create({ name, salary, educationLevel, description, contractType, location, deadline, owner: req.user })
+      .then(jobsDoc => res.json(jobsDoc))
+      .catch();
+});
+
 
 router.post("/signup", (req, res, next) => {
   const { companyName, email, originalPassword } = req.body;

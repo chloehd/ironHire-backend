@@ -149,7 +149,7 @@ router.put("/change-profile", (req, res, next) => {
   )
   .then(assoDoc => res.json(assoDoc))
   .catch(err => next(err));
-})
+});
 
 
 
