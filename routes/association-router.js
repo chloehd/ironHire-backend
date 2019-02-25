@@ -32,31 +32,6 @@ router.post("/signup", (req, res, next) => {
 });
 
 
-router.post("/login", (req, res, next) => {
-  const { email, originalPassword } = req.body;
-
-  Association.findOne({ email: { $eq: email } })
-    .then(userDoc => {
-      if (!userDoc) {
-        next(new Error("Incorrect email. 🤦🏼‍♀️"))        
-        return; 
-      }
-
-      const { encryptedPassword } = userDoc;
-      if (!bcrypt.compareSync(originalPassword, encryptedPassword)) {
-          next(new Error("Incorrect password. 🙅🏽‍♀️ "));
-      }
-      else {
-        req.logIn( userDoc, () => {
-          userDoc.encryptedPassword = undefined;
-          res.json({ userDoc });
-        });
-      }
-    })
-    .catch(err => next(err));
-});
-
-
 
 router.get("/", (req, res, next) => {
   News.find()

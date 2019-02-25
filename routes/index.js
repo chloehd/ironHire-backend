@@ -7,11 +7,6 @@ const RecruitUser = require("../models/recruiter-model.js");
 const CandidateUser = require("../models/candidate-model.js");
 
 
-/* GET home page. */
-// router.get('/', (req, res, next) => {
-//   res.render('index');
-// });
-
 router.get("/checkuser", (req, res, next) => {
   if (req.user) {
     req.user.encryptedPassword = undefined;

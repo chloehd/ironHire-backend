@@ -10,7 +10,6 @@ const router = express.Router();
 router.get("/", (req, res, next) => {
   Candidate.find()
     .then(candidateResults => {
-      console.log(candidateResults)
       res.json(candidateResults)})
     .catch(err => next(err));
 });

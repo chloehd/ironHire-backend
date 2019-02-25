@@ -9,8 +9,9 @@ router.get("/", (req, res, next) => {
     Jobs.find()
       .then(jobResults => res.json(jobResults))
       .catch(err => next(err));
-  });
+});
 
+  
 
   router.get("/:id", (req, res, next) => {
     const { id } = req.params;
