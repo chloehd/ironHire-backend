@@ -3,13 +3,8 @@ const bcrypt = require("bcrypt");
 
 const Association = require("../models/association-model.js");
 const News = require("../models/news-model.js");
-const Candidate = require("../models/candidate-model.js");
-
-
 
 const router = express.Router();
-
-
 
 router.post("/signup", (req, res, next) => {
   const { name, createdOn, description, email, originalPassword } = req.body;
@@ -30,7 +25,6 @@ router.post("/signup", (req, res, next) => {
     })
     .catch(err => next(err));
 });
-
 
 
 router.get("/", (req, res, next) => {

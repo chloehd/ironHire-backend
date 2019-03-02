@@ -3,6 +3,7 @@ const bcrypt = require("bcrypt");
 const Recruiter = require("../models/recruiter-model.js");
 const Jobs = require("../models/job-model.js");
 const Candidate = require("../models/candidate-model.js");
+
 const router = express.Router();
 
 
@@ -17,10 +18,15 @@ router.get("/", (req, res, next) => {
 //GET one candidate 
 router.get("/allcandidates/:id", (req, res, next) => {
   const { id } = req.params;
+  console.log(id);
+  
   Candidate.findById(id)
-    .then(candidateDoc => res.json(candidateDoc))
+    .then(candidateDoc => {res.json(candidateDoc)
+    console.log("one id thing", candidateDoc);
+    })
     .catch(err => next(err));
 });
+
 
 router.get("/add-job", (req, res, next) => {
   Candidate.find()
