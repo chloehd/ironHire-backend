@@ -82,6 +82,7 @@ router.get("/all", (req, res, next) => {
 
 router.get("/:id", (req, res, next) => {
   const { id } = req.params;
+  
   News.findById(id)
     .then(newsDoc => res.json(newsDoc))
     .catch(err => next(err));
@@ -100,6 +101,9 @@ router.delete("/:id", (req, res, next) => {
 
 router.get("/all/:id", (req, res, next) => {
   const { id } = req.params;
+
+  console.log("AAAAAAAAAGGGGGGGGG", req.params);
+
   Association.findById(id)
     .then(assoDoc => {
       res.json(assoDoc)
