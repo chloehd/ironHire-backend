@@ -6,11 +6,21 @@ const router = express.Router();
 
 // GET all of candidate data 
 router.get("/", (req, res, next) => {
+  if (req.user.role === "candidate") { 
     Jobs.find()
       .then(jobResults => res.json(jobResults))
       .catch(err => next(err));
+  } else {
+    res.status(401);
+    res.send('Permission denied');
+  }
 });
 
+  router.get("/cv", (req, res, next) => {
+    Candidate.findById(req.user.id)
+      .then(candidateDoc => res.json(candidateDoc))
+      .catch(err => next(err));
+  })
   
 
   router.get("/:id", (req, res, next) => {
