@@ -28,12 +28,17 @@ router.post("/signup", (req, res, next) => {
 
 
 router.get("/", (req, res, next) => {
-  News.find()
+  if (req.user.role === "association") {
+    News.find()
     .populate("owner")
     .sort({createdAt: -1})
     .limit(30)
     .then(newsResults => res.json(newsResults))
     .catch(err => next(err));
+  } else {
+    res.status(401);
+    res.send('None of your business, bro!');
+  }
 
 
   // Candidate.find({verified: {$eq: false}})
