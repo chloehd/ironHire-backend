@@ -13,7 +13,8 @@ const jobSchema = new Schema ({
     createdAt: { type: Date },
     deadline: { type: Date, required: true},
     owner: { 
-        type: Schema.Types.ObjectId, 
+        type: mongoose.Schema.Types.ObjectId, 
+        ref: "Recruiter",
         role: "recruiter",
      },
 }

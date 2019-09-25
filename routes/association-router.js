@@ -6,27 +6,6 @@ const News = require("../models/news-model.js");
 
 const router = express.Router();
 
-router.post("/signup", (req, res, next) => {
-  const { name, createdOn, description, email, originalPassword } = req.body;
-
-  if (!originalPassword || originalPassword.match(/[0-9]/) === null) {
-    next(new Error("Incorrect password."));
-    return; 
-  }
-
-  const encryptedPassword = bcrypt.hashSync(originalPassword, 10);
-
-  Association.create({ name, createdOn, description, email, encryptedPassword })
-    .then(userDoc => {
-      req.logIn(userDoc, () => {
-        userDoc.encryptedPassword = undefined;
-        res.json({ userDoc });
-      })
-    })
-    .catch(err => next(err));
-});
-
-
 router.get("/", (req, res, next) => {
   if (req.user.role === "association") {
     News.find()
@@ -56,6 +35,26 @@ router.post("/", (req, res, next) => {
 
   News.create({ message, image, link, owner: req.user })
     .then(newsDoc => res.json(newsDoc))
+    .catch(err => next(err));
+});
+
+router.post("/signup", (req, res, next) => {
+  const { name, createdOn, description, email, originalPassword } = req.body;
+
+  if (!originalPassword || originalPassword.match(/[0-9]/) === null) {
+    next(new Error("Incorrect password."));
+    return; 
+  }
+
+  const encryptedPassword = bcrypt.hashSync(originalPassword, 10);
+
+  Association.create({ name, createdOn, description, email, encryptedPassword })
+    .then(userDoc => {
+      req.logIn(userDoc, () => {
+        userDoc.encryptedPassword = undefined;
+        res.json({ userDoc });
+      })
+    })
     .catch(err => next(err));
 });
 

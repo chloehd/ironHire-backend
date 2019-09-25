@@ -4,46 +4,56 @@ const Jobs = require("../models/job-model.js");
 const Candidate = require("../models/candidate-model.js");
 const router = express.Router();
 
-// GET all of candidate data 
-router.get("/", (req, res, next) => {
-  if (req.user.role === "candidate") { 
-    Jobs.find()
-      .sort({name: 1})
-      .then(jobResults => res.json(jobResults))
-      .catch(err => next(err));
-  } else {
-    res.status(401);
-    res.send('Permission denied');
-  }
-});
+router.post("/signup", (req, res, next) => {
+  const { first_name, last_name, email, originalPassword } = req.body;
 
-//GET one job 
-router.get("/alljobs/:id", (req, res, next) => {
-  const { id } = req.params;
-  console.log(id);
-  
-  Jobs.findById(id)
-    .then(jobDoc => {res.json(jobDoc)
-    console.log("one id thing blah blah", jobDoc);
+  if (!originalPassword || originalPassword.match(/[0-9]/) === null) {
+    next(new Error("Incorrect password."));
+    return;
+  }
+
+  const encryptedPassword = bcrypt.hashSync(originalPassword, 10);
+
+  Candidate.create({ first_name, last_name, email, encryptedPassword })
+    .then(userDoc => {
+      req.logIn(userDoc, () => {
+        userDoc.encryptedPassword = undefined;
+        res.json({ userDoc });
+      });
     })
     .catch(err => next(err));
 });
 
-  router.get("/cv", (req, res, next) => {
-    Candidate.findById(req.user.id)
-      .then(candidateDoc => res.json(candidateDoc))
+// GET all of candidate data
+router.get("/", (req, res, next) => {
+  if (req.user.role === "candidate") {
+    Jobs.find()
+      .sort({ name: 1 })
+      .then(jobResults => res.json(jobResults))
       .catch(err => next(err));
-  })
-  
+  } else {
+    res.status(401);
+    res.send("Permission denied");
+  }
+});
 
-  // router.get("/:id", (req, res, next) => {
-  //   const { id } = req.params;
-  //   Jobs.findById(id)
-  //     // send the query results as a JSON response to the client
-  //     .then(jobDoc => res.json(jobDoc))
-  //     .catch(err => next(err));
-  // });
+//GET one job
+router.get("/alljobs/:id", (req, res, next) => {
+  const { id } = req.params;
 
+  Jobs.findById(id)
+    .populate('owner')
+    .then(jobDoc => {
+      res.json(jobDoc);
+    })
+    .catch(err => next(err));
+});
+
+router.get("/cv", (req, res, next) => {
+  Candidate.findById(req.user.id)
+    .then(candidateDoc => res.json(candidateDoc))
+    .catch(err => next(err));
+});
 
 //"POST" create a new candidate profile (add to the list)
 router.put("/", (req, res, next) => {
@@ -82,28 +92,5 @@ router.put("/", (req, res, next) => {
     .catch(err => next(err));
 });
 
-router.post("/signup", (req, res, next) => {
-  const { first_name, last_name, email, originalPassword } = req.body;
-
-  if (!originalPassword || originalPassword.match(/[0-9]/) === null) {
-    next(new Error("Incorrect password."));
-    return; 
-  }
-
-  const encryptedPassword = bcrypt.hashSync(originalPassword, 10);
-
-  Candidate.create({ first_name, last_name, email, encryptedPassword })
-    .then(userDoc => {
-      req.logIn(userDoc, () => {
-        userDoc.encryptedPassword = undefined;
-        res.json({ userDoc });
-      })
-    })
-    .catch(err => next(err));
-});
-
-
-
-// will add put(update) and delete routes later -hw
 
 module.exports = router;
