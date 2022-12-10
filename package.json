@@ -15,7 +15,7 @@
     "cors": "^2.8.5",
     "debug": "~2.6.0",
     "dotenv": "^6.2.0",
-    "express": "^4.17.1",
+    "express": "^4.17.3",
     "express-session": "^1.15.6",
     "ironhack_generator": "^1.2.0",
     "mongoose": "^5.3.15",
